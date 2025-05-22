@@ -1,0 +1,54 @@
+name: CI Pipeline
+
+on:
+  workflow_dispatch
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          source venv/bin/activate
+          pytest
+
+      - name: Deploy (Run Flask app in background)
+        if: success()
+        run: |
+          source venv/bin/activate
+          nohup python app.py &
+          sleep 5  
+          curl http://127.0.0.1:3005  
+          sleep 5
+
+      - name: Send Email Notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: GitHub Actions Build #${{ github.run_number }} - ${{ job.status }}
+          to: your.email@example.com
+          from: GitHub Actions <your.email@example.com>
+          body: |
+            Build Status: ${{ job.status }}
+            Repository: ${{ github.repository }}
+            Commit: ${{ github.sha }}
+            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
