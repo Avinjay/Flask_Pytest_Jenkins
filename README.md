@@ -153,6 +153,8 @@ python app.py
 
   <img width="947" alt="image" src="https://github.com/user-attachments/assets/0a534c3d-f820-4e50-beb2-c394c114d95f" />
   
+  <img width="677" alt="image" src="https://github.com/user-attachments/assets/c27ff729-41e9-4845-8307-59c23d817cb2" />
+
 
 - Email Notification in inbox
 
@@ -160,10 +162,12 @@ python app.py
 
 - GitHub Actions pipeline history
 
+  <img width="816" alt="image" src="https://github.com/user-attachments/assets/74541660-e5ba-4345-b1ca-da83207cd8d8" />
+
+  <img width="574" alt="image" src="https://github.com/user-attachments/assets/d5b00d73-b845-4ed7-8f49-7b93af53fb28" />
+
+
+
 ---
 
-## 📎 Submission
-
-- Push code with `Jenkinsfile`, `ci.yml`, and `README.md`
-- Provide GitHub repo link and screenshots
 
